@@ -5,13 +5,13 @@ public class SaveManager : MonoBehaviour
 {
     private const string DataKey = "GameData";
     
-    public void SaveData(GameData data)
+    public static void SaveData(GameData data)
     {
         var jsonData = JsonUtility.ToJson(data);
         PlayerPrefs.SetString(DataKey, jsonData);
     }
 
-    public GameData LoadData()
+    public static GameData LoadData()
     {
         if (!PlayerPrefs.HasKey(DataKey))
             return new GameData();
@@ -27,6 +27,7 @@ public class GameData
 {
     public int Score;
     public int Money;
+    public int Stage;
 
     public SettingsData Settings = new SettingsData();
 

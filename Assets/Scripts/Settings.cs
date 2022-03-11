@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public event Action<GameData.SettingsData> OnSettingsUpdate;
+    public UnityEvent<GameData.SettingsData> OnSettingsUpdate;
 
     [SerializeField] private Slider _soundSlider;
     [SerializeField] private Slider _musicSlider;
