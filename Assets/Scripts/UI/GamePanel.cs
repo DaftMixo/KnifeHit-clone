@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GamePanel : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _score;
+    [SerializeField] private TextMeshProUGUI _money;
+    [Header("Drop item")]
     [SerializeField] private GameObject _dropItemPrefab;
     [SerializeField] private GameObject _itemsHolder;
     
@@ -21,5 +25,10 @@ public class GamePanel : MonoBehaviour
         {
             _dropItemsList.Add(Instantiate(_dropItemPrefab, _itemsHolder.transform));
         }
+    }
+
+    public void UpdatePanel(GameData data, int itemsCount)
+    {
+        
     }
 }

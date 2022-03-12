@@ -365,6 +365,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2506201787211750141, guid: 55812f99ca78f6942989cf7b8b51f001, type: 3}
+      propertyPath: _targetScale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506201787211750141, guid: 55812f99ca78f6942989cf7b8b51f001, type: 3}
+      propertyPath: _targetHeight
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506201787211750141, guid: 55812f99ca78f6942989cf7b8b51f001, type: 3}
+      propertyPath: _targetPrefad
+      value: 
+      objectReference: {fileID: 7846459660139816438, guid: b5952a6a50a474044a944c8b269f541a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55812f99ca78f6942989cf7b8b51f001, type: 3}
 --- !u!1001 &4322796401315444680

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e782b5175bd1c674ca9e4a6ac132f20c, type: 3}
+  m_Name: SpawnChances
+  m_EditorClassIdentifier: 
+  _moneyChance:
+  - Chance: 40
+    ObstaclePrefab: {fileID: 393681349474802973, guid: 115c37010d61c6245a7fd338c061025b, type: 3}
+  - Chance: 30
+    ObstaclePrefab: {fileID: 393681349474802973, guid: d3111e0e09df9dd46bafdff8125b4ef3, type: 3}
+  - Chance: 20
+    ObstaclePrefab: {fileID: 3137168743836345003, guid: cf7ef0d544cc6924284d5ffdcac57aa7, type: 3}
+  - Chance: 10
+    ObstaclePrefab: {fileID: 5173069092158251123, guid: b2de638fb34a0dd45b83da0ff03a7511, type: 3}
+  _obstacles: []

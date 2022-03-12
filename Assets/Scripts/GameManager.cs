@@ -7,7 +7,7 @@ public partial class GameManager : MonoBehaviour
     private GameData _data;
     private Settings _settings;
     private AudioFX _audioFx;
-    private GameController _gameController;
+    private Game _game;
 
     private void Awake()
     {
@@ -15,7 +15,7 @@ public partial class GameManager : MonoBehaviour
         
         _settings = GetComponent<Settings>();
         _audioFx = GetComponent<AudioFX>();
-        _gameController = GetComponent<GameController>();
+        _game = GetComponent<Game>();
         
         _settings.Initialize(_data);
         _settings.OnSettingsUpdate.AddListener(SaveSettings);

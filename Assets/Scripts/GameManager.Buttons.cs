@@ -11,8 +11,8 @@ public partial class GameManager : MonoBehaviour
     {
         _ui.SetPanel(GamePanelState.Game);
         _audioFx.PlayButtonSound();
-        _gameController.InitializeLevel();
-        _ui.ResetGamePanel(_gameController.ItemsCount);
+        _game.InitializeLevel();
+        _ui.ResetGamePanel(_game.ItemsCount);
     }
 
     public void Home()
