@@ -38,4 +38,12 @@ public class GameData
         public float Sound = .7f;
         public bool Vibration;
     }
+
+    public override string ToString()
+    {
+        string text = "Score: " + Score + "\tMoney: " + Money + "\tStage: " + Stage +
+             "\nSettings:  Music: " + Settings.Music + "\tSound: " + Settings.Sound +
+             "\tVibration: " + Settings.Vibration;
+        return text;
+    }
 }

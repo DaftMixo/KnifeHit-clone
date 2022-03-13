@@ -10,6 +10,8 @@ public class Target : MonoBehaviour
 
     [SerializeField] private SpawnChances _spawnChances;
 
+    public GameObject Model => _model;
+
     private bool _isInitialized;
     
     public void Initialize(bool direction, float rotationSpeed)
@@ -18,8 +20,13 @@ public class Target : MonoBehaviour
         _rotationSpeed = rotationSpeed;
         _rightDirection = direction;
 
-        Instantiate(_spawnChances.GetMoney(), _model.transform);
-        Instantiate(_spawnChances.GetObstacle(), _model.transform);
+        GameObject moneyPrefab = _spawnChances.GetMoney();
+        if (moneyPrefab != null)
+            Instantiate(moneyPrefab, _model.transform);
+
+        GameObject obstaclePrefab = _spawnChances.GetObstacle();
+        if (obstaclePrefab != null)
+            Instantiate(obstaclePrefab, _model.transform);
 
         _isInitialized = true;
     }

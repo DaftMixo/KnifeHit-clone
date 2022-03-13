@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SpawnChances
   m_EditorClassIdentifier: 
   _moneyChance:
-  - Chance: 40
+  - Chance: 0
     ObstaclePrefab: {fileID: 393681349474802973, guid: 115c37010d61c6245a7fd338c061025b, type: 3}
-  - Chance: 30
+  - Chance: 79.4
     ObstaclePrefab: {fileID: 393681349474802973, guid: d3111e0e09df9dd46bafdff8125b4ef3, type: 3}
-  - Chance: 20
+  - Chance: 14
     ObstaclePrefab: {fileID: 3137168743836345003, guid: cf7ef0d544cc6924284d5ffdcac57aa7, type: 3}
-  - Chance: 10
+  - Chance: 12.4
     ObstaclePrefab: {fileID: 5173069092158251123, guid: b2de638fb34a0dd45b83da0ff03a7511, type: 3}
   _obstacles: []

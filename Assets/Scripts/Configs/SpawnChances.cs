@@ -4,28 +4,36 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 [CreateAssetMenu(fileName = "SpawnChances", menuName = "Configs/SpawnChances", order = 0)]
 public class SpawnChances : ScriptableObject
 {
+    [Tooltip("The probability is calculated from the sum of all set values\n\n" +
+             "Шанс рассчитывается из суммы всех установленных значений")]
     [SerializeField] private SpawnedObstacles[] _moneyChance;
+    
+    [Tooltip("The probability is calculated from the sum of all set values\n\n" +
+             "Шанс рассчитывается из суммы всех установленных значений")]
     [SerializeField] private SpawnedObstacles[] _obstacles;
 
     public GameObject GetMoney()
     {
-        GameObject returnObject = new GameObject();
-        returnObject.name = "null";
-        if (_moneyChance.Length == 0) return returnObject;
+        if (_moneyChance.Length == 0) return null;
 
-        float chance = Random.Range(0, 100);
-        
+        float maxChance = 0;
+        foreach (var money in _moneyChance)
+        {
+            maxChance += money.Chance;
+        }
+
+        float chance = Random.Range(0, maxChance);     
 
         float itemChance = 0;
         for (int i = 0; i < _moneyChance.Length; i++)
         {
             if (_moneyChance[i].Chance + itemChance >= chance && itemChance < chance)
             {
-                returnObject = _moneyChance[i].ObstaclePrefab;
-                break;
+                return _moneyChance[i].ObstaclePrefab;
             }
             else
             {
@@ -33,24 +41,27 @@ public class SpawnChances : ScriptableObject
             }
         }
 
-        return returnObject;
+        return null;
     }
 
     public GameObject GetObstacle()
     {
-        GameObject returnObject = new GameObject();
-        returnObject.name = "null";
-        if (_obstacles.Length == 0) return new GameObject();
-        
-        float chance = Random.Range(0, 100);
+        if (_obstacles.Length == 0) return null;
+
+        float maxChance = 0;
+        foreach (var obst in _obstacles)
+        {
+            maxChance += obst.Chance;
+        }
+
+        float chance = Random.Range(0, maxChance);
 
         float itemChance = 0;
         for (int i = 0; i < _obstacles.Length; i++)
         {
             if (_obstacles[i].Chance + itemChance >= chance && itemChance < chance)
             {
-                returnObject = _obstacles[i].ObstaclePrefab;
-                break;
+                return _obstacles[i].ObstaclePrefab;
             }
             else
             {
@@ -58,7 +69,7 @@ public class SpawnChances : ScriptableObject
             }
         }
 
-        return returnObject;
+        return null;
     }
 
     [Serializable]

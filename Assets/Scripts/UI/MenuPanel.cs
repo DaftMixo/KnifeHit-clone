@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class MenuPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void UpdatePanel(GameData data)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

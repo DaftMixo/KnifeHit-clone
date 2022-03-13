@@ -67,9 +67,17 @@ public class UIController : MonoBehaviour
         _gamePanel.ResetPanel(items);
     }
     
-    public void UpdateGamePanel()
+    public void UpdateGamePanel(GameData data, int score, int itemsCount)
     {
-        
+        GameData d = data;
+        d.Score = score;
+        _gamePanel.UpdatePanel(d, itemsCount);
+    }
+
+    public void UpdatePanels(GameData data)
+    {
+        _menuPanel.UpdatePanel(data);
+        _failPanel.UpdatePanel(data);
     }
 }
 

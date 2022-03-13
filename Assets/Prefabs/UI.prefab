@@ -2164,6 +2164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9368135a9fc837348acf061b3d95163e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _score: {fileID: 0}
+  _money: {fileID: 0}
   _dropItemPrefab: {fileID: 7252767634963028241, guid: b1cdec8e4d9c4b54e9152c2d17393af5, type: 3}
   _itemsHolder: {fileID: 4322796402368997377}
 --- !u!1 &4322796402978296198
