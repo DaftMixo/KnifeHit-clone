@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
     public UnityEvent OnGameFail;
     public UnityEvent OnStageComplete;
     public UnityEvent OnTakeMoney;
+    public UnityEvent OnHit;
 
     private Target _target;
     private DropItem _dropItem;
@@ -54,7 +55,7 @@ public class Game : MonoBehaviour
         _target.transform.localPosition = new Vector3(0, _targetHeight);
         
         var rotDirection = Random.Range(0, 2) == 0 ? true : false;
-        var rotSpeed = Random.Range(50, 300);
+        var rotSpeed = Random.Range(50, 250);
         _target.Initialize(rotDirection, rotSpeed, _gameObjectScale);
 
         StartCoroutine(InitDropItem(0));
@@ -103,7 +104,8 @@ public class Game : MonoBehaviour
         {
             case HitPoint.Target:
                 if (GameManager.Inst.Data.Settings.Vibration) Vibration.Vibrate(30);
-                _gameData.Score++;
+                _gameData.Score += 1 + _gameData.Stage;
+                OnHit?.Invoke();
                 if (_itemsCount <= 0)
                 {
                     _gameData.Stage++;

@@ -88,7 +88,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 05b517e735c2cec4abd77c440b4c76ad, type: 3}
   - {fileID: 8300000, guid: 9df4c2e414fd7d847978300d2a2b0213, type: 3}
   _musicAudioClips:
-  - {fileID: 8300000, guid: af6820b68bf376a43998c5f50d5cde34, type: 3}
   - {fileID: 8300000, guid: da2364bcebf1bf049af59cdc0d67b902, type: 3}
   - {fileID: 8300000, guid: fdf5c196ba068364693183956d9dfa30, type: 3}
   - {fileID: 8300000, guid: 0a80a95d2b94c7b468163aaa3f08552d, type: 3}
@@ -104,6 +103,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa89d683e5ee0442a027b8e6baf857d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetPrefad: {fileID: 7846459660139816438, guid: b5952a6a50a474044a944c8b269f541a, type: 3}
+  _dropItemPrefab: {fileID: 5551068300345115225, guid: 7b5e0d70b0f547a409b0d0b268ba6ee0, type: 3}
+  _targetHeight: 1.75
+  _dropItemYPosition: -3
+  _gameObjectScale: 2
+  OnDataUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameFail:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStageComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeMoney:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2129396431569695911
 GameObject:
   m_ObjectHideFlags: 0

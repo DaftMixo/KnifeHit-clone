@@ -41,7 +41,13 @@ public partial class GameManager : MonoBehaviour
         _game.OnStageComplete.AddListener(OnStageComplete);
         _game.OnGameFail.AddListener(OnGameFail);
         _game.OnTakeMoney.AddListener(OnTakeMoney);
+        _game.OnHit.AddListener(OnHit);
         UpdateData();
+    }
+
+    private void OnHit()
+    {
+        _audioFx.PlayHitSound();
     }
 
     private void OnStageComplete()
@@ -100,6 +106,7 @@ public partial class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        _game.OnHit.RemoveAllListeners();
         _game.OnTakeMoney.RemoveAllListeners();
         _game.OnGameFail.RemoveAllListeners();
         _game.OnStageComplete.RemoveAllListeners();

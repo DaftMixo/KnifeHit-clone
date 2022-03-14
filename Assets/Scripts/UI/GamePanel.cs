@@ -33,7 +33,7 @@ public class GamePanel : MonoBehaviour
     {
         _stage.text = $"Stage: {data.Stage}";
         _score.text = $"Score: {data.Score}";
-        _money.text = $"Money: {data.Money}";
+        _money.text = data.Money.ToString();
 
         foreach (var item in _dropItemsList)
         {

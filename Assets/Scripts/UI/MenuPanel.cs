@@ -12,6 +12,6 @@ public class MenuPanel : MonoBehaviour
     public void UpdatePanel(GameData data)
     {
         _score.text = $"Record: {data.Score}";
-        _money.text = $"Money: {data.Money}";
+        _money.text = data.Money.ToString();
     }
 }

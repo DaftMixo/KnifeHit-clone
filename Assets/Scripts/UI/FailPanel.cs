@@ -13,7 +13,7 @@ public class FailPanel : MonoBehaviour
     public void UpdatePanel(GameData data)
     {
         _score.text = $"Score: {data.Score}";
-        _money.text = $"Money: {data.Money}";
+        _money.text = data.Money.ToString();
         _stage.text = $"Stage: {data.Stage}";
     }
 }

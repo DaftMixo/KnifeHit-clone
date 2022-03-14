@@ -13,6 +13,8 @@ public class AudioFX : MonoBehaviour
     [Space]
     [SerializeField] private AudioClip[] _buttonAudioClips;
     [SerializeField] private AudioClip[] _musicAudioClips;
+    [Space]
+    [SerializeField] private AudioClip[] _hitaudioClips;
 
     private AudioClip _playedClip;
 
@@ -48,6 +50,13 @@ public class AudioFX : MonoBehaviour
     public void SetMusic(float value)
     {
         _mixer.SetFloat("Music", Mathf.Log10(value) * 20);
+    }
+
+    public void PlayHitSound()
+    {
+        if (_hitaudioClips.Length == 0) return;
+        _soundSource.clip = _hitaudioClips[Random.Range(0, _hitaudioClips.Length)];
+        _soundSource.Play();
     }
 
     public void PlayButtonSound()
