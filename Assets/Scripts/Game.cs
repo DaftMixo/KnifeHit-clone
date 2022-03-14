@@ -15,14 +15,14 @@ public class Game : MonoBehaviour
     [SerializeField] private float _gameObjectScale = 1.3f;
 
     public UnityEvent OnDataUpdate;
-    public UnityEvent<GameData> OnGameFail;
+    public UnityEvent OnGameFail;
     public UnityEvent OnStageComplete;
     public UnityEvent OnTakeMoney;
 
     private Target _target;
     private DropItem _dropItem;
     private GameObject _level;
-    private GameData _gameData = new GameData();
+    private GameData _gameData;
     private List<DropItem> _dropedItems = new List<DropItem>();
 
     private int _itemsCount;
@@ -33,8 +33,19 @@ public class Game : MonoBehaviour
     public bool IsInitialized => _isInitialized;
     public int ItemsCount => _itemsCount;
 
-    public void InitializeLevel()
+    public void InitData(GameData data)
     {
+        _gameData = data;
+    }
+    public void InitializeLevel(GameData data)
+    {
+        _gameData = data;
+        if(_currentLevel == 0)
+        {
+            _gameData.Score = 0;
+            _gameData.Stage = 0;
+        }
+
         _level = new GameObject($"Level {_currentLevel}");
         _level.transform.parent = transform;
 
@@ -44,7 +55,7 @@ public class Game : MonoBehaviour
         
         var rotDirection = Random.Range(0, 2) == 0 ? true : false;
         var rotSpeed = Random.Range(50, 300);
-        _target.Initialize(rotDirection, rotSpeed);
+        _target.Initialize(rotDirection, rotSpeed, _gameObjectScale);
 
         StartCoroutine(InitDropItem(0));
 
@@ -59,7 +70,9 @@ public class Game : MonoBehaviour
         {
             _dropItem.Push();
             if (_itemsCount > 0)
+            { 
                 StartCoroutine(InitDropItem(.2f));
+            }
             else
                 _dropItem = null;
         }
@@ -89,13 +102,12 @@ public class Game : MonoBehaviour
         switch (hit)
         {
             case HitPoint.Target:
+                if (GameManager.Inst.Data.Settings.Vibration) Vibration.Vibrate(30);
                 _gameData.Score++;
                 if (_itemsCount <= 0)
                 {
                     _gameData.Stage++;
-                    DisableLevel();
-                    NextLevel();
-                    OnStageComplete?.Invoke();
+                    StartCoroutine(NextLevel());
                 }
                 OnDataUpdate?.Invoke();
                 break;
@@ -104,21 +116,23 @@ public class Game : MonoBehaviour
                 OnDataUpdate?.Invoke();
                 break;
             case HitPoint.DropItem:
-                DisableLevel();
-                OnGameFail?.Invoke(_gameData);
+                if (GameManager.Inst.Data.Settings.Vibration) Vibration.Vibrate(30);
                 OnDataUpdate?.Invoke();
-                _gameData.Stage = 0;
-                _gameData.Score = 0;
+                OnGameFail?.Invoke();
                 break;
         }
 
     }
 
-    private void NextLevel()
+    private IEnumerator NextLevel()
     {
-        if (_isInitialized) return;
+        _target?.Destroy();
+        yield return new WaitForSeconds(1);
+        DisableLevel();
         _currentLevel++;
-        InitializeLevel();
+        InitializeLevel(_gameData);
+
+        OnStageComplete?.Invoke();
     }
 
     public void DisableLevel()
@@ -129,6 +143,9 @@ public class Game : MonoBehaviour
         }
         _level.SetActive(false);
         Destroy(_level.gameObject, .1f);
+        _dropItem = null;
+        _currentLevel = 0;
         _isInitialized = false;
+        OnDataUpdate?.Invoke();
     }
 }

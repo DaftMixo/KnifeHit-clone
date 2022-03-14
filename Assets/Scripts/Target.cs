@@ -3,6 +3,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     [SerializeField] private GameObject _model;
+    [SerializeField] private TargetPart[] _parts;
     [SerializeField] private AnimationCurve _shapeCurve;
     
     [SerializeField] private float _rotationSpeed = 1;
@@ -14,7 +15,7 @@ public class Target : MonoBehaviour
 
     private bool _isInitialized;
     
-    public void Initialize(bool direction, float rotationSpeed)
+    public void Initialize(bool direction, float rotationSpeed, float scale)
     {
         this.name = "Target root";
         _rotationSpeed = rotationSpeed;
@@ -29,6 +30,15 @@ public class Target : MonoBehaviour
             Instantiate(obstaclePrefab, _model.transform);
 
         _isInitialized = true;
+    }
+
+    public void Destroy()
+    {
+        var child = GetComponentsInChildren<Rigidbody2D>();
+        foreach (var part in child)
+        {
+            part.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
     private void Update()
     {

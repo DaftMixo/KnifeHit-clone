@@ -10,6 +10,7 @@ public class DropItem : MonoBehaviour
     public UnityEvent<DropItem> OnDrop;
 
     [SerializeField] private float _speed = 1f;
+    [SerializeField] private ParticleSystem _TargetHitPart;
 
     private PolygonCollider2D _collider;
     private Rigidbody2D _rb;
@@ -23,10 +24,10 @@ public class DropItem : MonoBehaviour
 
     public void Push()
     {
-        OnDrop?.Invoke(this);
         _isActive = true;
         _rb.bodyType = RigidbodyType2D.Dynamic;
         _rb.AddForce(Vector2.up * _speed, ForceMode2D.Impulse);
+        OnDrop?.Invoke(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,16 +40,17 @@ public class DropItem : MonoBehaviour
             _isActive = false;
             _rb.velocity = Vector2.left;
             Destroy(_collider);
-            Destroy(this.gameObject, 1f);
+            Destroy(this.gameObject, 3f);
         }
 
-        var target = collision.gameObject.GetComponent<Target>();
+        var target = collision.gameObject.GetComponent<TargetPart>();
         if (target != null)
         {
             OnHit?.Invoke(HitPoint.Target);
+            _TargetHitPart.Play();
             _rb.velocity = Vector2.zero;
             _rb.bodyType = RigidbodyType2D.Static;
-            transform.parent = target.Model.transform;
+            transform.parent = target.gameObject.transform;
             _isActive = false;
         }
     }

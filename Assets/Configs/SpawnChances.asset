@@ -21,4 +21,12 @@ MonoBehaviour:
     ObstaclePrefab: {fileID: 3137168743836345003, guid: cf7ef0d544cc6924284d5ffdcac57aa7, type: 3}
   - Chance: 12.4
     ObstaclePrefab: {fileID: 5173069092158251123, guid: b2de638fb34a0dd45b83da0ff03a7511, type: 3}
-  _obstacles: []
+  _obstacles:
+  - Chance: 0
+    ObstaclePrefab: {fileID: 393681349474802973, guid: 4b02abb7a72c91e47b462f934657a561, type: 3}
+  - Chance: 15.2
+    ObstaclePrefab: {fileID: 393681349474802973, guid: 78797eb5538005947ae729ddcf12cc3c, type: 3}
+  - Chance: 76.9
+    ObstaclePrefab: {fileID: 3137168743836345003, guid: 33bdfad5207c90048aadf9918c05677d, type: 3}
+  - Chance: 38.8
+    ObstaclePrefab: {fileID: 5173069092158251123, guid: 99e53e8401cf8be428aae1f34e46edc6, type: 3}

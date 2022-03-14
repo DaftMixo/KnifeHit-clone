@@ -2,6 +2,8 @@ using UnityEngine;
 
 public partial class GameManager : MonoBehaviour
 {
+    public static GameManager Inst;
+
     [SerializeField] private UIController _ui;
 
     private GameData _data;
@@ -9,15 +11,25 @@ public partial class GameManager : MonoBehaviour
     private AudioFX _audioFx;
     private Game _game;
 
+    private int _maxScore;
+
+    public GameData Data => _data;
+
     private void Awake()
     {
+        if (Inst != null)
+            Destroy(this.gameObject);
+        Inst = this;
+
         _data = SaveManager.LoadData();
+        _maxScore = _data.Score;
         Debug.Log(_data.ToString());
 
         _settings = GetComponent<Settings>();
         _audioFx = GetComponent<AudioFX>();
         _game = GetComponent<Game>();
-        
+
+        _game.InitData(_data);
         _settings.Initialize(_data);
         _settings.OnSettingsUpdate.AddListener(SaveSettings);
     }
@@ -37,12 +49,13 @@ public partial class GameManager : MonoBehaviour
         _ui.ResetGamePanel(_game.ItemsCount);
     }
 
-    private void OnGameFail(GameData data)
+    private void OnGameFail()
     {
-        if (_data.Score < data.Score)
-            _data.Score = data.Score;
         _game.DisableLevel();
+        if (_data.Score < _maxScore)
+            _data.Score = _maxScore;
         _ui.SetPanel(GamePanelState.Fail);
+
     }
 
     private void OnTakeMoney()
@@ -52,10 +65,16 @@ public partial class GameManager : MonoBehaviour
 
     private void UpdateData()
     {
-        _data.Stage = _game.Data.Stage;
+        if (_game.IsInitialized)
+        {
+            _data = _game.Data;
+        }
+
+        _ui.UpdateGamePanel(_game.Data, _game.ItemsCount);
+        _ui.UpdateFailPanel(_game.Data);
+        _ui.UpdatePanels(_data);
 
         SaveManager.SaveData(_data);
-        _ui.UpdateGamePanel(_data, _game.Data.Score, _game.ItemsCount);
     }
     
     private void SaveSettings(GameData.SettingsData data)
@@ -73,6 +92,8 @@ public partial class GameManager : MonoBehaviour
     {
         if (!focus)
         {
+            if (_data.Score < _maxScore)
+                _data.Score = _maxScore;
             SaveManager.SaveData(_data);
         }
     }
